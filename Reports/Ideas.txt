@@ -1,0 +1,2 @@
+We should make an interface using HTML, CSS, and jQuery/Javascript.
+Build an Accounting/Finance Management System with the web interface.
