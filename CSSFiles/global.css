@@ -1,4 +1,21 @@
 html{
-	background-color: #AAAAAA;
-	text-align: center;
+	background-color: #FFFFFF;
+	height: 100%;
+}
+
+body{
+	height: 100%;
+}
+
+#outerWrapper{
+	margin-left: 210px;
+	background-color: #0000FF;
+	width: 785px;
+	height: 90%
+}
+
+#innerWrapper{
+	background-color: #CCCCCC;
+	width: 775px;
+	height: 100%;
 }
