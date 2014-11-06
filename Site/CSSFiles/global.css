@@ -19,3 +19,12 @@ body{
 	width: 775px;
 	height: 100%;
 }
+
+#Logo{
+    color: #0000FF;
+}
+
+#footer{
+    font-size:10px;
+    text-align:center;
+}
