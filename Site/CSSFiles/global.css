@@ -1,15 +1,17 @@
 html{
 	background-color: #FFFFFF;
-	height: 100%;
+	height: 97.5%;
 }
 
 body{
 	height: 100%;
+	overflow: auto;
+	font-family: arial;
+	font-size: 12px;
 }
 
 #outerWrapper{
 	margin-left: 210px;
-	background-color: #0000FF;
 	width: 785px;
 	height: 90%
 }
@@ -18,6 +20,7 @@ body{
 	background-color: #CCCCCC;
 	width: 775px;
 	height: 100%;
+	border: 3px solid #0000FF;
 }
 
 #Logo{
@@ -25,6 +28,156 @@ body{
 }
 
 #footer{
-    font-size:10px;
-    text-align:center;
+    font-size: 10px;
+    text-align: center;
+}
+
+#custInfo{
+	margin-left: 5px;
+	margin-right: 5px;
+	text-align: left;
+}
+
+#custName{
+	text-align: right;
+}
+
+#custActNum{
+	text-align: right;
+}
+
+#transactions{
+	margin-left: 5px;
+	margin-top: 15px;
+	text-align: left;
+}
+
+#transTable{
+	margin-top: 10px;
+}
+
+#transTable table{
+	border: 1px solid #999999;
+	width: 725px;
+	display: block;
+}
+
+#transTable thead{
+	background-color: #FFFFFF;
+	display: block;
+	height: 20px;
+}
+
+#transTable tfoot th:nth-child(1){
+	width: 30px;
+}
+
+#transTable tfoot th:nth-child(2){
+	width: 75px;
+}
+
+#transTable tfoot th:nth-child(3){
+	width: 255px;
+}
+
+#transTable tfoot th:nth-child(4){
+	width: 120px;
+}
+
+#transTable tfoot th:nth-child(5){
+	width: 125px;
+	color: #FF0000;
+}
+
+#transTable tfoot th:nth-child(6){
+	width: 120px;
+}
+
+#transTable thead th:nth-child(1){
+	width: 30px;
+}
+
+#transTable thead th:nth-child(2){
+	width: 75px;
+}
+
+#transTable thead th:nth-child(3){
+	width: 255px;
+}
+
+#transTable thead th:nth-child(4){
+	width: 120px;
+}
+
+#transTable thead th:nth-child(5){
+	width: 125px;
+}
+
+#transTable thead th:nth-child(6){
+	width: 120px;
+}
+
+#transTable tbody tr td:nth-child(1){
+	width: 30px;
+	text-align: center;
+}
+
+#transTable tbody tr td:nth-child(2){
+	width: 75px;
+	text-align: center;
+}
+
+#transTable tbody tr td:nth-child(3){
+	width: 255px;
+}
+
+#transTable tbody tr td:nth-child(4){
+	width: 120px;
+	text-align: center;
+}
+
+#transTable tbody tr td:nth-child(5){
+	width: 125px;
+	text-align: center;
+	color: #FF0000;
+}
+
+#transTable tbody tr td:nth-child(6){
+	width: 120px;
+	text-align: center;
+}
+
+#transTable tfoot{
+	background-color: #FFFFFF;
+	display: block;
+	height: 20px;
+}
+
+#transTableBody{
+	height: 153px;
+	overflow: auto;
+	display: block;
+	width: 725px;
+	background-color: #000000;
+}
+
+#transTableBody tr{
+	border: 1px solid #000000;
+	height: 16px;
+}
+
+.amtOut{
+	color: #FF0000;
+}
+
+.odd{
+	background-color: #A9E2F3;
+}
+
+.even{
+	background-color: #F2F5A9;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
