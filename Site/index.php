@@ -32,7 +32,7 @@
                 <br />
                 <div>
                     <p>
-                        <a href="NewAccount.php">I don't have an account</a>
+                        <a href="NewAccount.html">I don't have an account</a>
                     </p>
                 </div>
 			</div>
