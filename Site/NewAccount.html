@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>New Account</title>
+        <link rel="stylesheet" type="text/css" href="CSSFiles/global.css?v=2" />
+    </head>
+    <body align="center">
+        <div id="outerWrapper" align="center">
+            <div id="innerWrapper">
+				<h1 id="Logo">
+					$implicity
+				</h1>
+                <h3>
+                    A simple finance tracking software
+                </h3>
+                <br />
+                <h3 id="Logo">
+                    New Account Setup
+                </h1>
+                <p id="custInfo">
+                <div id="myForm">
+                <form action="register.php" method="POST" id="regiForm">
+					<br />
+					<label for="Username">Account Number: <label/>
+                    <input id="Username" name="field1" type="text" />
+					<br /> <br />
+					<label for="Initial">Initial Balance: <label/>
+                    <input id="Initial" name="field3" type="text" />
+					<br /> <br />
+					<label for="Password">Password: <label/>
+                    <input id="Password" name="field2" type="text" />
+					<br />
+					<br />
+					</div>
+                    <input type="submit" name="submit" value="Submit">
+                </form>
+                <br />
+                <br />
+				<br />
+                <br />
+               
+				<a id="return" href="">Return to Homepage<a/>
+                </p>
+                
+            </div>
+        </div>
+        <div id="footer" align="center">
+            <p>
+            Last Updated: Tuesday, December 9, 2014 at 3:29 P.M.
+            </p>
+        </div>
+        <script type="text/javascript" src="jQueryFiles/jqueryUI/jquery-ui.js"></script>
+        <script type="text/javascript" src="jQueryFiles/jquery-2.1.1.js"></script>
+        <script type="text/javascript">
+				$(document).ready(function(){
+				
+				var time = jQuery.now();
+				$("#Username").val(time);
+				//$("#Username").prop('disabled', true);
+				$('#Username').focus(function(e) {
+					$(this).blur();
+				});
+			});
+        </script>
+    </body>
+</html>
