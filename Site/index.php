@@ -26,13 +26,13 @@
                         <input type="password" name="password" />
                     </p>
 
-                    <form action="AccountView.html"><input type="submit" value="Submit" /></form>
+                    <form action="AccountView.php"><input type="submit" value="Submit" /></form>
                 </div>
                 <br />
                 <br />
                 <div>
                     <p>
-                        <a href="NewAccount.html">I don't have an account</a>
+                        <a href="NewAccount.php">I don't have an account</a>
                     </p>
                 </div>
 			</div>
@@ -44,3 +44,4 @@
         </div>
 	</body>
 </html>
+
