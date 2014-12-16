@@ -87,7 +87,8 @@
         </div>
         <form style="display: none;" action="AccountView.php" method="POST">
         	<input type="hidden" name="field1" id="field1" />
-        	<input type="submit" id="sendData" style="display: none";/>
+			<input type="hidden" name="field2" id="field2" />
+        	<input type="submit" id="sendData" style="display: none;"/>
         </form>
 		<script type="text/javascript">
 			var count = 1;
@@ -100,7 +101,7 @@
 				var file = "accounts/success.txt";
 				getInfo();
 				function getInfo(){
-					$.post(file, function(data){
+					$.get(file, function(data){
 					   	var lines = data.split('-');
 					   	$('#custActNum').text(lines[0]);
 					   	acctFile = String(lines[0].toString()) + "-" + String(lines[1].toString());
@@ -181,7 +182,7 @@
 					iter++;
 				}
 				$('#field1').val($('#data1').text());
-				JSON.stringify(arr);
+				$('#field2').val(JSON.stringify(arr));
 				$('#sendData').click();
 			});
 					
