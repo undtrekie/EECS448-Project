@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="CSSFiles/global.css" />
+		<script type="text/Javascript" src="jQueryFiles/jquery-2.1.1.js"></script>
+		<script type="text/Javascript" src="jQueryFiles/jqueryUI/jquery-ui.js"></script>
+		<title>Account View</title>
+	</head>
+	<body align="center">
+		<div id="outerWrapper" align="center">
+			<div id="innerWrapper">
+				<h1>
+					Account View
+				</h1>
+				<h3 id="custInfo">
+					<br />
+					<span align="left">Account Number:</span>
+					<span id="custActNum"></span>
+					<br />
+				</h3>
+				<button id="loadAcct">
+					<span>Load Account</span>
+				</button>
+				<div id="transactions" style="display: none;">
+					<input type="radio" id="withdraw" name="trasnType" checked>&nbsp;Cash Withdrawl</input>
+					<br />
+					<input type="radio" id="deposit" name="trasnType">&nbsp;Deposit</input>
+					<br />
+					<input type="radio" id="charge" name="trasnType">&nbsp;Debit/Credit Transaction (Charge)</input>
+					<br />
+					<span>Amount: </span>
+					<input type="text" id="ammount" />
+					<br />
+					<br />
+					<span>Description: </span>
+					<input type="text" id="desc" />
+					<br />
+					<br />
+					<button id="addTrans">
+						<span>Add Transaction</span>
+					</button>
+				</div>
+				<div id="transTable">
+					<table cellspacing="0">
+						<thead>
+								<th>
+									No.
+								</th>
+								<th>
+									Description
+								</th>
+								<th>
+									Amount In
+								</th>
+								<th>
+									Amount Out
+								</th>
+								<th>
+									Balance
+								</th>
+						</thead>
+						<tbody id="transTableBody">
+							
+						</tbody>
+						<tfoot>
+							<tr>
+								<th id="numTrans"></th>
+								<th>&nbsp;</th>
+								<th id="totAmtIn" class="amtIn"></th>
+								<th id="totAmtOut" class="amtOut"></th>
+								<th id="totBal"></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div>
+					<br />
+					<button id="logout" style="display: none;">
+						<span>Logout</span>
+					</button>
+				</div>
+			</div>
+		</div>
+        <div id="data1" style="display: none;">
+        </div>
+        <div id="export">
+        </div>
+        <form style="display: none;" action="AccountView.php" method="POST">
+        	<input type="hidden" name="field1" id="field1" />
+        	<input type="submit" id="sendData" style="display: none";/>
+        </form>
+		<script type="text/javascript">
+			var count = 1;
+			var amt;
+			var desc;
+			var credit = 0;
+			var debit = 0;
+			var acctFile;
+			$(document).ready(function(){
+				var file = "accounts/success.txt";
+				getInfo();
+				function getInfo(){
+					$.post(file, function(data){
+					   	var lines = data.split('-');
+					   	$('#custActNum').text(lines[0]);
+					   	acctFile = String(lines[0].toString()) + "-" + String(lines[1].toString());
+					   	lines = acctFile.split('\n');
+					   	acctFile = lines[0];
+					   	$('#data1').text("accounts/"+acctFile);
+					},'text');
+				}	
+				if($('#totBal').text().substr(0,1) == "("){
+					$('#totBal').css('color','#FF0000');
+				}
+				else{
+					$('#totBal').css('color','#000000');
+				}
+			});
+			
+			$('#loadAcct').click(function(event){
+				$.get($('#data1').text(), function(acct){
+					var contents = acct.split('\n');
+					for(var i=0; i<contents.length-1; i++){
+						if(i==0){
+							desc = "Opening Account";
+							$('#deposit').click();
+							amt = String(contents[i]);
+							amt = parseFloat(amt);
+							$('#ammount').val(amt.toFixed(2));
+							$('#desc').val(desc);
+							$('#addTrans').click();
+						}
+						else{
+							desc = String(contents[i]);
+							i++;
+							amt = String(contents[i]);
+							if(amt.substr(0,1) == "-"){
+								amt = amt.substr(1);
+								$('#charge').click();
+							}
+							else{
+								$('#deposit').click();
+							}
+							amt = parseFloat(amt);
+							$('#ammount').val(amt.toFixed(2));
+							$('#desc').val(desc);
+							$('#addTrans').click();
+						}
+					}
+					$('#loadAcct').css('display','none');
+					$('#transactions').css('display','block');
+					$('#logout').css('display','block');
+				},'text');
+			});
+			
+			//Function to add
+			$('#logout').click(function(){
+				var iter = 1;
+				var arr = new Array();;
+				for(var i=1; i<count; i++){
+					var des;
+					if(iter > 1){
+						des = $('tr:nth-child('+i+') td:nth-child(2)').text();
+					}
+					var ammt;
+					if($('tr:nth-child('+i+') td:nth-child(4)').text().substr(0,2) == "($"){
+						ammt = $('tr:nth-child('+i+') td:nth-child(4)').text();
+						ammt = "-" + ammt.substr(2);
+						ammt = ammt.substr(0, ammt.length-1);
+					}
+					else{
+						ammt = $('tr:nth-child('+i+') td:nth-child(3)').text().substr(1);
+					}
+					if(iter == 1){
+						arr[i-1] = ammt;
+					}
+					else{
+						arr[(i*2)-3] = des;
+						arr[(i*2)-2] = ammt;
+					}
+					iter++;
+				}
+				$('#field1').val($('#data1').text());
+				JSON.stringify(arr);
+				$('#sendData').click();
+			});
+					
+			//Function For Adding New Transactions
+			$('#addTrans').click(function(){
+				amt = $('#ammount').val();
+				desc = $('#desc').val();
+				var cell1 = "<td>" + count + "</td>";
+				var cell3 = "<td>" + desc + "</td>";
+				var cell4 = "";
+				var cell5 = "";
+				var cell6 = "";
+				var neg = false;
+				var totBal = $('#totBal').text();
+				if(totBal.substr(0,2) == "-$"){
+					totBal = "-" + totBal.substr(2);
+					neg = true;
+				}
+				else if(totBal.substr(0,1) == "$"){
+					totBal = totBal.substr(1)
+					neg = false;
+				}
+				else{
+					totBal = "0.00";
+					neg = false;
+				}
+				if($('#withdraw').prop('checked') == true || $('#charge').prop('checked') == true){
+					cell4 = "<td>&nbsp;</td>";
+					cell5 = "<td>($" + amt + ")</td>";
+					debit += parseFloat(amt);
+					if(neg){
+						totBal = (parseFloat(totBal));
+					}
+					else{
+						totBal = parseFloat(totBal);
+					}
+					var tempBal = totBal - parseFloat(amt);
+					tempBal = tempBal.toFixed(2);
+					totBal = tempBal;
+					if(tempBal < 0.00){
+						tempBal = Math.abs(tempBal);
+						cell6 = "<td style='color: #FF0000;'>-$" + tempBal + "</td>";
+					}
+					else{
+						cell6 = "<td>$" + tempBal + "</td>";
+					}
+				}
+				else{
+					cell5 = "<td>&nbsp;</td>";
+					cell4 = "<td>$" + amt + "</td>";
+					credit += parseFloat(amt);
+					if(neg){
+						totBal = (parseFloat(totBal));
+					}
+					else{
+						totBal = parseFloat(totBal);
+					}
+					var tempBal = totBal + parseFloat(amt);
+					tempBal = tempBal.toFixed(2);
+					totBal = tempBal;
+					if(tempBal < 0.00){
+						tempBal = Math.abs(tempBal);
+						cell6 = "<td style='color: #FF0000;'>-$" + tempBal + "</td>";
+					}
+					else{
+						cell6 = "<td>$" + tempBal + "</td>";
+					}
+				}
+				$('#numTrans').text(count);
+				if(totBal < 0.00){
+					totBal = Math.abs(totBal);
+					$('#totBal').text('-$' + totBal);
+					$('#totBal').css('color', '#FF0000');
+				}
+				else{
+					$('#totBal').text('$' + totBal);
+					$('#totBal').css('color', '#000000');
+				}
+				var type = "";
+				if(count%2 == 1){
+					type = "<tr class='odd'>";
+				}
+				else{
+					type = "<tr class='even'>";
+				}
+				$('#totAmtIn').text("$" + credit.toFixed(2));
+				$('#totAmtOut').text("($" + debit.toFixed(2) + ")");
+				$('#totAmtOut').css('color','#FF0000');
+				var newStr = type + cell1 + cell3 + cell4 + cell5 + cell6 + "</tr>";
+				$('#transTableBody').append(newStr);
+				count++;
+			});
+		</script>
+	</body>
+</html>

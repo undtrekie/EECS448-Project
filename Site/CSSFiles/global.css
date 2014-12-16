@@ -73,23 +73,19 @@ body{
 }
 
 #transTable tfoot th:nth-child(2){
-	width: 75px;
+	width: 330px;
 }
 
 #transTable tfoot th:nth-child(3){
-	width: 255px;
-}
-
-#transTable tfoot th:nth-child(4){
 	width: 120px;
 }
 
-#transTable tfoot th:nth-child(5){
+#transTable tfoot th:nth-child(4){
 	width: 125px;
 	color: #FF0000;
 }
 
-#transTable tfoot th:nth-child(6){
+#transTable tfoot th:nth-child(5){
 	width: 120px;
 }
 
@@ -98,22 +94,18 @@ body{
 }
 
 #transTable thead th:nth-child(2){
-	width: 75px;
+	width: 330px;
 }
 
 #transTable thead th:nth-child(3){
-	width: 255px;
-}
-
-#transTable thead th:nth-child(4){
 	width: 120px;
 }
 
-#transTable thead th:nth-child(5){
+#transTable thead th:nth-child(4){
 	width: 125px;
 }
 
-#transTable thead th:nth-child(6){
+#transTable thead th:nth-child(5){
 	width: 120px;
 }
 
@@ -123,26 +115,21 @@ body{
 }
 
 #transTable tbody tr td:nth-child(2){
-	width: 75px;
-	text-align: center;
+	width: 330px;
 }
 
 #transTable tbody tr td:nth-child(3){
-	width: 255px;
-}
-
-#transTable tbody tr td:nth-child(4){
 	width: 120px;
 	text-align: center;
 }
 
-#transTable tbody tr td:nth-child(5){
+#transTable tbody tr td:nth-child(4){
 	width: 125px;
 	text-align: center;
 	color: #FF0000;
 }
 
-#transTable tbody tr td:nth-child(6){
+#transTable tbody tr td:nth-child(5){
 	width: 120px;
 	text-align: center;
 }
