@@ -13,7 +13,7 @@
     else {
         die('no post data to process');
     }
-	
+
 	header( 'Location: https://undtrekie.no-ip.biz/' ) ;
-	
+
 ?>
